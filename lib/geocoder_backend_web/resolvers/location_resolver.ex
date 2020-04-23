@@ -17,7 +17,7 @@ defmodule GeocoderBackendWeb.Resolvers.LocationResolver do
   }
 
   def match(_parent, args, _resolutions) do
-    {:ok, for({_key, value} <- @fake_geocoder, value.address =~ args.address, into: [], do: value)}
+    {:ok, for({_key, value} <- @fake_geocoder, String.downcase(value.address) =~ String.downcase(args.address), into: [], do: value)}
   end
 
 end
